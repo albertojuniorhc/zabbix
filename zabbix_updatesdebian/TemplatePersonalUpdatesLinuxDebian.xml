@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-01-24T20:37:36Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Personal Updates Linux Debian</template>
+            <name>Template Personal Updates Linux Debian</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Zabbix Trapper</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Numero de updates pendentes no S.O.</name>
+                    <type>TRAP</type>
+                    <key>updates.quantidade</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>updates</units>
+                    <applications>
+                        <application>
+                            <name>Zabbix Trapper</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{nodata(25h)}=1</expression>
+                            <name>Falta de recebimento de informações sobre updates do S.O.</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}&gt;0</expression>
+                            <name>Updates pendentes no S.O.</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>
